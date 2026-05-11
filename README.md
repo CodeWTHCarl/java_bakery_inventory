@@ -7,9 +7,9 @@ for the Intermediate Programming subject.
 
 | Name     | Role                            | Branch         |
 |----------|---------------------------------|----------------|
-| Ken      | Backend Logic Developer         | ken-crud        |
+| Ken      | Backend Logic Developer         | ken-main        |
 | Giane    | Input & Validation Engineer     | giane-input     |
-| Jonathan | System Integrator/Menu Developer| jonathan-menu   |
+| Jonathan | Database Design & Menu Developer| jonathan-menu   |
 
 ## Tech Stack
 - Language: Java (Procedural — no OOP, no frameworks)
@@ -19,15 +19,15 @@ for the Intermediate Programming subject.
 ## Project Structure
 src/
 ├── Main.java            # Menu system (Jonathan)
-├── DBConnection.java    # JDBC connection (Jonathan)
+├── DBConnection.java    # JDBC connection (Giane)
 ├── CRUDOperations.java  # All SQL/CRUD logic (Ken)
 └── InputHelper.java     # Input validation (Giane)
 
 sql/
-└── bakery_schema.sql    # Database schema (Giane)
+└── bakery_schema.sql    # Database schema (Jonathan)
 
 ##  How to Run
 1. Import bakery_schema.sql into MySQL
 2. Update DB credentials in DBConnection.java
 3. Compile: javac src/*.java
-4. Run: java -cp src Main
+4. Run: java -cp "out:lib/mysql-connector-j-9.3.0.jar" Main

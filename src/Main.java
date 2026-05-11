@@ -1,28 +1,21 @@
-// ============================================================
+
 // Main.java
 // Purpose : Entry point and menu system for the Bakery
 //           Inventory & Management System
 // Author  : Jonathan
-// ============================================================
 
 public class Main {
 
-    // ==========================================================
     // CONSTANT: total number of menu options
     // Update this if menu options are added or removed
-    // ==========================================================
     private static final int TOTAL_OPTIONS = 7;
 
-
-    // ==========================================================
     // main()
     // Purpose : Program entry point — JVM starts here
     //           Runs the menu loop until user exits
-    // ==========================================================
     public static void main(String[] args) {
 
         printWelcome();
-
         // Test DB connection on startup
         // Warns user immediately if DB is unreachable
         DBConnection.testConnection();
@@ -34,7 +27,7 @@ public class Main {
         do {
             printMenu();
 
-            // Delegates input reading to InputHelper (Giane's file)
+            // Delegates input reading to InputHelper
             choice = InputHelper.getMenuChoice(TOTAL_OPTIONS);
 
             // Routes choice to the correct CRUD operation
@@ -44,12 +37,10 @@ public class Main {
     }
 
 
-    // ==========================================================
     // handleChoice()
     // Purpose : Routes the user's menu selection to the correct
     //           method in CRUDOperations (Ken's file)
     // Params  : choice → the validated integer from the menu
-    // ==========================================================
     private static void handleChoice(int choice) {
 
         switch (choice) {
@@ -104,157 +95,28 @@ public class Main {
     }
 
 
-    // ==========================================================
+
     // printWelcome()
     // Purpose : Displays the system header on startup
     //           Shown once when the program first launches
-    // ==========================================================
     private static void printWelcome() {
 
         clearScreen();
-
         System.out.println();
         System.out.println("  ╔══════════════════════════════════════════════════════════╗");
-        System.out.println("  ║         BAKERY INVENTORY & MANAGEMENT SYSTEM             ║");
+        System.out.println("  ║        BAKERY INVENTORY & MANAGEMENT SYSTEM              ║");
         System.out.println("  ║          Advanced Computer Programming — Java            ║");
+        System.out.println("  ╠══════════════════════════════════════════════════════════╣");
+        System.out.println("  ║  Developers:                                             ║");
+        System.out.println("  ║    Ken      → Backend Logic & CRUD Operations            ║");
+        System.out.println("  ║    Giane    → Input Validation & DB Connection           ║");
+        System.out.println("  ║    Jonathan → Menu System & DB Schema/Design             ║");
         System.out.println("  ╚══════════════════════════════════════════════════════════╝");
         System.out.println();
     }
 
-
-    // ==========================================================
     // printMenu()
     // Purpose : Displays the main menu options each loop cycle
-    // ==========================================================
-    private static void printMenu() {
-// ============================================================
-// Main.java
-// Purpose : Entry point and menu system for the Bakery
-//           Inventory & Management System
-// Author  : Jonathan
-// ============================================================
-
-public class Main {
-
-    // ==========================================================
-    // CONSTANT: total number of menu options
-    // Update this if menu options are added or removed
-    // ==========================================================
-    private static final int TOTAL_OPTIONS = 7;
-
-
-    // ==========================================================
-    // main()
-    // Purpose : Program entry point — JVM starts here
-    //           Runs the menu loop until user exits
-    // ==========================================================
-    public static void main(String[] args) {
-
-        printWelcome();
-
-        // Test DB connection on startup
-        // Warns user immediately if DB is unreachable
-        DBConnection.testConnection();
-        InputHelper.pressEnterToContinue();
-
-        int choice;
-
-        // do-while ensures menu always shows at least once
-        do {
-            printMenu();
-
-            // Delegates input reading to InputHelper (Giane's file)
-            choice = InputHelper.getMenuChoice(TOTAL_OPTIONS);
-
-            // Routes choice to the correct CRUD operation
-            handleChoice(choice);
-
-        } while (choice != TOTAL_OPTIONS); // exit when user picks 7
-    }
-
-
-    // ==========================================================
-    // handleChoice()
-    // Purpose : Routes the user's menu selection to the correct
-    //           method in CRUDOperations (Ken's file)
-    // Params  : choice → the validated integer from the menu
-    // ==========================================================
-    private static void handleChoice(int choice) {
-
-        switch (choice) {
-
-            case 1:
-                // CREATE — Add a new product
-                CRUDOperations.insertProduct();
-                InputHelper.pressEnterToContinue();
-                break;
-
-            case 2:
-                // READ ALL — View all products
-                CRUDOperations.viewAllProducts();
-                InputHelper.pressEnterToContinue();
-                break;
-
-            case 3:
-                // READ ONE — Search product by ID
-                CRUDOperations.searchProductById();
-                InputHelper.pressEnterToContinue();
-                break;
-
-            case 4:
-                // UPDATE — Modify an existing product
-                CRUDOperations.updateProduct();
-                InputHelper.pressEnterToContinue();
-                break;
-
-            case 5:
-                // DELETE — Remove a product permanently
-                CRUDOperations.deleteProduct();
-                InputHelper.pressEnterToContinue();
-                break;
-
-            case 6:
-                // TRANSACTION — Restock a product (commit/rollback)
-                CRUDOperations.restockProduct();
-                InputHelper.pressEnterToContinue();
-                break;
-
-            case 7:
-                // EXIT — Clean up and close program
-                printGoodbye();
-                InputHelper.closeScanner(); // close Scanner resource
-                break;
-
-            default:
-                // Should never reach here due to InputHelper validation
-                System.out.println("  [!] Invalid choice. Please try again.");
-                break;
-        }
-    }
-
-
-    // ==========================================================
-    // printWelcome()
-    // Purpose : Displays the system header on startup
-    //           Shown once when the program first launches
-    // ==========================================================
-    private static void printWelcome() {
-
-        clearScreen();
-
-        System.out.println();
-        System.out.println("  ╔══════════════════════════════════════════════════════════╗");
-        System.out.println("  ║         BAKERY INVENTORY & MANAGEMENT SYSTEM             ║");
-        System.out.println("  ║          Advanced Computer Programming — Java            ║");
-        System.out.println("  ╚══════════════════════════════════════════════════════════╝");
-        System.out.println();
-    }
-
-
-    // ==========================================================
-    // printMenu()
-    // Purpose : Displays the main menu options each loop cycle
-    // ==========================================================
     private static void printMenu() {
 
         System.out.println();
@@ -263,4 +125,56 @@ public class Main {
         System.out.println("  ├──────────────────────────────────┤");
         System.out.println("  │  1.  Add New Product             │");
         System.out.println("  │  2.  View All Products           │");
-        System.out.println("  │  3.  Search Product by ID      
+        System.out.println("  │  3.  Search Product by ID        │");
+        System.out.println("  │  4.  Update Product              │");
+        System.out.println("  │  5.  Delete Product              │");
+        System.out.println("  │  6.  Restock Product             │");
+        System.out.println("  │  7.  Exit                        │");
+        System.out.println("  └──────────────────────────────────┘");
+        System.out.println();
+    }
+
+    // printGoodbye()
+    // Purpose : Displays exit message when user selects option 7
+    private static void printGoodbye() {
+
+        System.out.println();
+        System.out.println("  ╔══════════════════════════════════════════════════════════╗");
+        System.out.println("  ║         Thank you for using the Bakery System!           ║");
+        System.out.println("  ║                        Goodbye!                          ║");
+        System.out.println("  ╚══════════════════════════════════════════════════════════╝");
+        System.out.println();
+    }
+
+    // clearScreen()
+    // Purpose : Clears the console for a cleaner display
+    //           Works on both Windows and Unix/Mac systems
+    private static void clearScreen() {
+
+        try {
+            // Check the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+
+            if (os.contains("win")) {
+                // Windows clear command
+                new ProcessBuilder("cmd", "/c", "cls")
+                    .inheritIO()
+                    .start()
+                    .waitFor();
+            } else {
+                // Unix/Mac/Linux clear command
+                new ProcessBuilder("clear")
+                    .inheritIO()
+                    .start()
+                    .waitFor();
+            }
+
+        } catch (Exception e) {
+            // If clearing fails just print blank lines
+            // Program still works — just won't clear screen
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
+        }
+    }
+}

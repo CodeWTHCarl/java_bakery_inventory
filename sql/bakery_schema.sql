@@ -1,18 +1,13 @@
--- ============================================================
--- Bakery Inventory & Management System
--- Database Schema
--- Author: Giane
--- ============================================================
+--jonathan
 
 -- Step 1: Create and select the database
 CREATE DATABASE IF NOT EXISTS bakery_db;
 USE bakery_db;
 
--- ============================================================
+
 -- TABLE 1: categories
 -- Purpose: Stores product categories (e.g., Bread, Pastry)
 -- This is the PARENT table
--- ============================================================
 CREATE TABLE IF NOT EXISTS categories (
     id   INT          NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -20,11 +15,9 @@ CREATE TABLE IF NOT EXISTS categories (
     CONSTRAINT pk_categories PRIMARY KEY (id)
 );
 
--- ============================================================
 -- TABLE 2: products
 -- Purpose: Stores all bakery inventory items
 -- This is the CHILD table — references categories via FK
--- ============================================================
 CREATE TABLE IF NOT EXISTS products (
     id          INT            NOT NULL AUTO_INCREMENT,
     name        VARCHAR(150)   NOT NULL,
@@ -39,9 +32,7 @@ CREATE TABLE IF NOT EXISTS products (
                                ON UPDATE CASCADE
 );
 
--- ============================================================
 -- SAMPLE DATA: Categories
--- ============================================================
 INSERT INTO categories (name) VALUES
     ('Bread'),
     ('Pastry'),
@@ -49,9 +40,7 @@ INSERT INTO categories (name) VALUES
     ('Cookies'),
     ('Drinks');
 
--- ============================================================
 -- SAMPLE DATA: Products
--- ============================================================
 INSERT INTO products (name, category_id, price, stock) VALUES
     ('Pandesal',          1, 5.00,  100),
     ('Spanish Bread',     1, 8.00,  80),

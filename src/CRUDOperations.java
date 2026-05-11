@@ -1,8 +1,6 @@
-// ============================================================
+
 // CRUDOperations.java
 // Purpose : All database CRUD operations for the Bakery System
-// Author  : Ken
-// ============================================================
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,20 +9,17 @@ import java.sql.SQLException;
 
 public class CRUDOperations {
 
-    // ==========================================================
     // UTILITY: printDivider()
     // Purpose : Prints a separator line for cleaner console output
-    // ==========================================================
+
     private static void printDivider() {
         System.out.println("  " + "-".repeat(60));
     }
 
-
-    // ==========================================================
     // UTILITY: viewAllCategories()
     // Purpose : Displays available categories so user can pick
     //           a valid category_id during insert and update
-    // ==========================================================
+   
     public static void viewAllCategories() {
 
         String sql = "SELECT id, name FROM categories ORDER BY id";
@@ -73,12 +68,10 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // OPERATION 1: insertProduct()   → CREATE
     // Purpose : Adds a new product into the products table
     // Called  : From Main.java menu option 1
-    // ==========================================================
+
     public static void insertProduct() {
 
         System.out.println("\n  === ADD NEW PRODUCT ===");
@@ -86,7 +79,7 @@ public class CRUDOperations {
         // Show categories first so user knows valid IDs
         viewAllCategories();
 
-        // Collect input through InputHelper (Giane's file)
+        // Collect input through InputHelper
         String name       = InputHelper.getString(
                                 "  Product name       : ", 150);
         int categoryId    = InputHelper.getInt(
@@ -140,12 +133,10 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // OPERATION 2: viewAllProducts()   → READ (all records)
     // Purpose : Displays all products with category name
     // Called  : From Main.java menu option 2
-    // ==========================================================
+
     public static void viewAllProducts() {
 
         System.out.println("\n  === ALL PRODUCTS ===");
@@ -215,12 +206,10 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // OPERATION 3: searchProductById()   → READ (by ID)
     // Purpose : Finds and displays a single product by its ID
     // Called  : From Main.java menu option 3
-    // ==========================================================
+
     public static void searchProductById() {
 
         System.out.println("\n  === SEARCH PRODUCT BY ID ===");
@@ -273,12 +262,10 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // OPERATION 4: updateProduct()   → UPDATE
     // Purpose : Modifies an existing product's details
     // Called  : From Main.java menu option 4
-    // ==========================================================
+  
     public static void updateProduct() {
 
         System.out.println("\n  === UPDATE PRODUCT ===");
@@ -352,12 +339,10 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // OPERATION 5: deleteProduct()   → DELETE
     // Purpose : Removes a product from the database permanently
     // Called  : From Main.java menu option 5
-    // ==========================================================
+
     public static void deleteProduct() {
 
         System.out.println("\n  === DELETE PRODUCT ===");
@@ -415,14 +400,12 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // OPERATION 6: restockProduct()   → TRANSACTION
     // Purpose : Adds stock to a product AND logs the restock
     //           Uses commit/rollback — both must succeed
     //           or neither change is saved
     // Called  : From Main.java menu option 6
-    // ==========================================================
+   
     public static void restockProduct() {
 
         System.out.println("\n  === RESTOCK PRODUCT (Transaction) ===");
@@ -460,7 +443,7 @@ public class CRUDOperations {
                 return;
             }
 
-            // ── TRANSACTION START ──────────────────────────────
+            // TRANSACTION START
             // Turn off auto-commit so we control when to save
             connection.setAutoCommit(false);
 
@@ -488,7 +471,7 @@ public class CRUDOperations {
                 connection.rollback(); // ← UNDO everything
                 System.out.println("\n  [!] Restock failed. Changes rolled back.");
             }
-            // ── TRANSACTION END ────────────────────────────────
+            // TRANSACTION END
 
         } catch (SQLException e) {
             // Something crashed mid-transaction — rollback to be safe
@@ -518,13 +501,10 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // UTILITY: productExists()
     // Purpose : Checks if a product with the given ID exists
     //           Prevents update/delete on non-existent records
     // Returns : true if found, false if not
-    // ==========================================================
     private static boolean productExists(int id) {
 
         String sql = "SELECT id FROM products WHERE id = ?";
@@ -553,13 +533,11 @@ public class CRUDOperations {
         }
     }
 
-
-    // ==========================================================
     // UTILITY: closeResources()
     // Purpose : Closes ResultSet, PreparedStatement, Connection
     //           Called in every finally block
     //           Passing null for any param safely skips it
-    // ==========================================================
+
     private static void closeResources(
             ResultSet rs,
             PreparedStatement ps,
